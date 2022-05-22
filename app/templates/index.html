@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-white-50 text-center">
+    <p>
+        Guess where enemy ship is<br>
+        Click slot on the table<br>
+        if miss, <span style="color:white">white</span> -> <span class="bg-dark" style="color:black">black</span><br>
+        if hit, <span style="color:white">white</span> -> <span style="color:crimson">crimson</span><br>
+        There are 5 ships in 16 slots<br>
+        if you can hit all 5 ships in 10 clicks, you win!<br>
+        <br>
+        have fun!<br>
+    </p>
+    <h1 class="text-white" id="game_result"></h1>
+
+    <!-- grid -->
+    <table class="container mt-5 table table-bordered table-dark table-striped table-hover">
+        <!-- 4x4 -->
+        <tbody>
+            <tr>
+                <th id="slot_0" onclick="click_slot_0()">A1</th>
+                <th id="slot_1" onclick="click_slot_1()">A2</th>
+                <th id="slot_2" onclick="click_slot_2()">A3</th>
+                <th id="slot_3" onclick="click_slot_3()">A4</th>
+            </tr>
+            <tr>
+                <th id="slot_4" onclick="click_slot_4()">B1</th>
+                <th id="slot_5" onclick="click_slot_5()">B2</th>
+                <th id="slot_6" onclick="click_slot_6()">B3</th>
+                <th id="slot_7" onclick="click_slot_7()">B4</th>
+            </tr>
+            <tr>
+                <th id="slot_8" onclick="click_slot_8()">C1</th>
+                <th id="slot_9" onclick="click_slot_9()">C2</th>
+                <th id="slot_10" onclick="click_slot_10()">C3</th>
+                <th id="slot_11" onclick="click_slot_11()">C4</th>
+            </tr>
+            <tr>
+                <th id="slot_12" onclick="click_slot_12()">D1</th>
+                <th id="slot_13" onclick="click_slot_13()">D1</th>
+                <th id="slot_14" onclick="click_slot_14()">D1</th>
+                <th id="slot_15" onclick="click_slot_15()">D1</th>
+            </tr>
+            </thead>
+    </table>
+    <button onclick="after_1_click()">Check if hit or miss</button>
+    <br>
+    <!--
+    <input type="button" class="MyButton" value="Check if hit or miss" onclick="markCrimson()">
+    -->
+    <script>
+
+        let click_count = 0;
+        let slot_clicked = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        let ship = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        let clicked = 0;
+        let win_or_not = 0;
+        /*
+        0   miss
+        1   hit
+
+        */
+        function click_slot_0() {if(clicked==0){clicked=1;slot_clicked[0] = 1; document.getElementById("slot_0").style.color = "black";}}
+        function click_slot_1() {if(clicked==0){clicked=1;slot_clicked[1] = 1; document.getElementById("slot_1").style.color = "black";}}
+        function click_slot_2() {if(clicked==0){clicked=1;slot_clicked[2] = 1; document.getElementById("slot_2").style.color = "black";}}
+        function click_slot_3() {if(clicked==0){clicked=1;slot_clicked[3] = 1; document.getElementById("slot_3").style.color = "black";}}
+        function click_slot_4() {if(clicked==0){clicked=1;slot_clicked[4] = 1; document.getElementById("slot_4").style.color = "black";}}
+        function click_slot_5() {if(clicked==0){clicked=1;slot_clicked[5] = 1; document.getElementById("slot_5").style.color = "black";}}
+        function click_slot_6() {if(clicked==0){clicked=1;slot_clicked[6] = 1; document.getElementById("slot_6").style.color = "black";}}
+        function click_slot_7() {if(clicked==0){clicked=1;slot_clicked[7] = 1; document.getElementById("slot_7").style.color = "black";}}
+        function click_slot_8() {if(clicked==0){clicked=1;slot_clicked[8] = 1; document.getElementById("slot_8").style.color = "black";}}
+        function click_slot_9() {if(clicked==0){clicked=1;slot_clicked[9] = 1; document.getElementById("slot_9").style.color = "black";}}
+        function click_slot_10() {if(clicked==0){clicked=1;slot_clicked[10] = 1; document.getElementById("slot_10").style.color = "black";}}
+        function click_slot_11() {if(clicked==0){clicked=1;slot_clicked[11] = 1; document.getElementById("slot_11").style.color = "black";}}
+        function click_slot_12() {if(clicked==0){clicked=1;slot_clicked[12] = 1; document.getElementById("slot_12").style.color = "black";}}
+        function click_slot_13() {if(clicked==0){clicked=1;slot_clicked[13] = 1; document.getElementById("slot_13").style.color = "black";}}
+        function click_slot_14() {if(clicked==0){clicked=1;slot_clicked[14] = 1; document.getElementById("slot_14").style.color = "black";}}
+        function click_slot_15() {if(clicked==0){clicked=1;slot_clicked[15] = 1; document.getElementById("slot_15").style.color = "black";}}
+
+        function after_1_click(){
+            if(clicked == 1){
+                clicked=0;
+                click_count++;
+                getTest();
+
+                setTimeout(markCrimson(), 2000);    // wait 1.5 sec   (which it not the best way to do things)
+
+            }
+        }
+        // AJAX to server by GET
+        function getTest() {
+            $.ajax({
+                type: 'GET',
+                url: '/testGet',
+                dataType: 'json',
+                data: {
+                    'result': slot_clicked[0].toString()
+                    + slot_clicked[1].toString()
+                    + slot_clicked[2].toString()
+                    + slot_clicked[3].toString()
+                    + slot_clicked[4].toString()
+                    + slot_clicked[5].toString()
+                    + slot_clicked[6].toString()
+                    + slot_clicked[7].toString()
+                    + slot_clicked[8].toString()
+                    + slot_clicked[9].toString()
+                    + slot_clicked[10].toString()
+                    + slot_clicked[11].toString()
+                    + slot_clicked[12].toString()
+                    + slot_clicked[13].toString()
+                    + slot_clicked[14].toString()
+                    + slot_clicked[15].toString()
+                },
+                success: function (res) {
+                    console.log(res)
+                },
+                error: function () {
+                    consle.log('error')
+                }
+            })
+
+            GetAjax();
+        }
+
+
+
+        function GetAjax() {
+            $.ajax({
+                url: "/dataFromAjax",
+                contentType: "GET",
+                success: function (data) {
+                    ship[0]=data.slot_0; ship[1]=data.slot_1; ship[2]=data.slot_2; ship[3]=data.slot_3;
+                    ship[4]=data.slot_4; ship[5]=data.slot_5; ship[6]=data.slot_6; ship[7]=data.slot_7;
+                    ship[8]=data.slot_8; ship[9]=data.slot_9; ship[10]=data.slot_10; ship[11]=data.slot_11;
+                    ship[12]=data.slot_12; ship[13]=data.slot_13; ship[14]=data.slot_14; ship[15]=data.slot_15;
+                    //alert("1ST SLOT: " + data.slot_0 + "2ND SLOT: " + data.slot_1);
+                    document.getElementById("ajax_send_back").innerHTML =
+                        data.slot_0+" "+data.slot_1+" "+data.slot_2+" "+data.slot_3+"<br>"+
+                        data.slot_4+" "+data.slot_5+" "+data.slot_6+" "+data.slot_7+"<br>"+
+                        data.slot_8+" "+data.slot_9+" "+data.slot_10+" "+data.slot_11+"<br>"+
+                        data.slot_12+" "+data.slot_13+" "+data.slot_14+" "+data.slot_15;
+                },
+                error: function () {
+                    //alert("AJAX DOWNLOAD failed.")
+                }
+            });
+        }
+
+
+        function markCrimson(){
+            for(let i=0; i<16; i++){
+                ship[i]=parseInt(ship[i]);
+            }
+            let hit_count = 0;
+            for(let i=0; i<16; i++){
+                if(ship[i]==1){
+                    hit_count++;
+                    document.getElementById("slot_"+i.toString()).style.color = "crimson";
+                }
+            }
+            if(hit_count >=5){
+                document.getElementById("game_result").innerHTML = "YOU WIN!";
+                win_or_not = 1;
+                getTest_send_win();
+            }
+            else if(click_count>=10){
+                document.getElementById("game_result").innerHTML = "GAME OVER";
+                getTest_send_win();
+            }
+        }
+
+
+        // AJAX upload "win or not"
+        function getTest_send_win() {
+            $.ajax({
+                type: 'GET',
+                url: '/testGet_win',
+                dataType: 'json',
+                data: {
+                    'win_or_not': win_or_not.toString()
+                },
+                success: function (res) {
+                    console.log(res)
+                },
+                error: function () {
+                    consle.log('error')
+                }
+            })
+        }
+
+
+
+
+
+        // AJAX download game record
+
+
+        function GetAjax_best5() {
+            $.ajax({
+                url: "/dataFromAjax_top5",
+                contentType: "GET",
+                success: function (data) {
+                    //alert("NAME: " + data.name_0 + "WIN %: " + data.percentage_0);
+
+                    document.getElementById("Highest_and_current_user").innerHTML =
+                        "all time highest (win%):&nbsp;&nbsp;&nbsp;"+data.name_0+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+data.percentage_0+"<br>"+
+                        "your win%:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+Math.floor(data.percentage_1 * 100)/100+"<br>"
+                        ;
+                },
+                error: function () {
+                    document.getElementById("Top_5_history_record").innerHTML ="执行失败了...";
+                }
+            });
+        }
+
+    </script>
+
+    <br>
+    <div>debug map below</div>
+    <div id="ajax_send_back">.....</div>
+    <button onclick="GetAjax_best5()">History top 5</button>
+    <button onclick="window.location.reload()">Restart</button>     <!-- which is actually refresh page -->
+    <div id="Highest_and_current_user"></div>
+
+
+    {% endblock %}

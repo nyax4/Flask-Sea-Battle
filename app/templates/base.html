@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% if title %}
+        <title>{{ title }} - SEA BATTLE</title>
+        {% else %}
+        <title>SEA BATTLE</title>        <!-- fallback -->
+        {% endif %}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link href="{{ url_for('static/gamesheet.css')}} " rel="stylesheet">
+    </head>
+    <body class="bg-black text-white-50">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-center">
+            <ul class="nav navbar-nav">
+                <li class="nav-item active navbar-brand">
+                    <a class="nav-link text-white" href="{{ url_for('index') }}">SEA BATTLE</a>
+                </li class="nav-link nav-item">
+                    {% if current_user.is_anonymous %}
+                    <a href="{{ url_for('login') }}" class="text-warning pin_right">Login</a>
+                    {% else %}
+                    <a href="{{ url_for('logout') }}" class="text-warning pin_right">Logout</a>
+                    {% endif %}
+            </ul>
+        </nav>
+        
+
+        
+        {% block content %}
+        {% endblock %}
+        
+        
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    </body>
+</html>

@@ -1,0 +1,91 @@
+:root {
+    --tgreen: #538d4e;
+    --tyellow: #b59f3b;
+    --tgrey: #3a3a3c;
+    --background: #121213;
+    --tlightgrey: #808384;
+}
+#header {
+    margin: auto;
+    text-align: center;
+    font-family:'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-size: xx-large;
+    color: white;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+h1 {
+    font: white;
+    font-family:Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+hr {
+    border: 1px solid var(--tgrey);
+}
+table {
+    margin: 20px 0 20px 0;
+    display: inline-block;
+    font-size:xx-large;
+    font-family:'Courier New', Courier, monospace;
+    font-weight:bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;        
+}
+#guessbox {
+    margin-left: 50px;
+}
+td {
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--tgrey);
+    color: white;
+}
+#board td:hover {
+    border: 2px solid var(--tlightgrey);
+}
+td.selected {
+    border: 2px solid var(--tyellow) !important;
+}
+td.confirmed {
+    border:2px solid var(--tgreen) !important;
+}
+td.absent {
+    color: var(--tgrey);
+    border:2px solid var(--tgrey) !important;
+}
+td.occupied {
+    border: 2px solid var(--tlightgrey);
+}
+td.wrong {
+    border: 2px solid #fa5448;
+}
+td.correct {
+    border: 2px solid var(--tgreen);
+}
+button {
+    display: block;
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: white;
+    font-size: x-large;
+    height: 50px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: var(--tgrey);
+    background-color: var(--background);
+    margin: auto;
+    margin-top: 20px;
+}
+button:hover {
+    border-color: var(--tgreen);
+}
+:focus {
+    outline: none !important;
+}

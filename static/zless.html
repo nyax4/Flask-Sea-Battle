@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html style="background-color:black;">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Wordle</title>
+</head>
+<link rel="stylesheet" href="gamesheet.css"> 
+
+<script src="gridcheck.js"></script>
+<script src="lettercheck.js"></script>
+
+<script>
+    const word = 'small'.toLowerCase();
+    const validkeys = 'abcdefghijklmnopqrstuvwxy';
+    var btoday = validkeys.split('').sort(function(){return 0.5-Math.random()}).join('');
+    console.log(btoday);
+    var guesslist = [];
+    var keycount = 0;
+    var ecount = 0;
+    var gcount = 0;
+
+    function fillboard(b) {
+        var val = 0;
+        for (let i=0; i<5; i++) {
+            for (let j=0; j<5; j++) {
+                const cellid = (i.toString() + j.toString());
+                const cell = document.getElementById(cellid);
+                cell.innerHTML = b[val];
+                val += 1
+            }
+        }
+    }
+
+</script>
+
+<script>
+
+    const cellnum = [];
+
+    function select(c) {
+        cells = c.parentElement.parentElement.getElementsByTagName('td');
+        for (var i in cells) {
+            var cell = cells.item(i); //cell 
+            //cell.className = (cell != c) ? "" : "selected"; //if the cell is not the one clicked, make it empty
+            
+            if (cell != c) {            //if the iterated cell is not the one clicked on
+                if (cell.className == 'confirmed' || cell.className == 'absent') {
+                    continue
+                } else {
+                    cell.className = "";
+                }
+            } else {
+                if (cell.className == 'confirmed' || cell.className == 'absent') {
+                    continue
+                } else {
+                    cell.className = 'selected';
+                }
+            }
+        }
+    }
+
+    window.addEventListener('keydown', function (inputk) {
+
+        if (validkeys.includes(inputk.key)) {
+            keycount += 1;
+            if (keycount <= 5) {
+                cellid = ('g' + (keycount - 1).toString());
+                cell = document.getElementById(cellid);
+                cell.innerHTML = inputk.key;
+                cell.className = 'occupied'
+                
+                guesslist.push(inputk.key);
+            } else {
+                keycount -= 1;
+            }
+        } else {
+
+            if (inputk.key == 'Enter') {
+
+                const cells = document.getElementsByClassName('selected');
+
+                if (cells.length > 0) {
+
+                    cellnum.length = 0;
+                    celltag = cells[0].id;
+                    cellnum.push(celltag);
+                    cells[0].className = '';
+                    document.getElementById('confirm').click()
+                    ecount += 1;
+
+                } else {
+
+                    if (keycount == 5) {
+
+                        const guesscells = document.getElementsByClassName('occupied');
+                        const gl = [];
+                        for (let i=0; i<5; i++) {
+                            gl.push(guesscells[i]);
+                        }
+
+                        if (word != guesslist.join("")) {
+                            for (let i=0; i<gl.length; i++) {
+                                gl[i].className = 'wrong';
+                            }
+                            guesslist = [];
+                            gcount += 1;
+                            setTimeout(function () {
+                                    for (let i=0; i<gl.length; i++) {
+                                        gl[i].className=''
+                                        gl[i].innerHTML=''
+                                    }
+                                }, 1500);
+                        } else {
+                            for (let i=0; i<gl.length; i++) {
+                                gl[i].className = 'correct';
+                            }
+                            gcount += 1;
+                            alert("Explosions: " + ecount.toString() + " Guesses: " + gcount.toString());
+                            guesslist = [];
+                        }
+                        keycount = 0;
+                    }
+
+
+                }
+            }
+
+            if (inputk.key == 'Backspace') {
+
+                if (keycount >= 1) {
+
+                    keycount -= 1;
+                    const cellid2 = ('g' + (keycount).toString());
+                    document.getElementById(cellid2).innerHTML = "";
+                    document.getElementById(cellid2).className = "";
+                    guesslist.pop();
+                }
+            }
+        }
+    }, false);
+
+</script>
+
+<body onload="fillboard(btoday)">
+
+    <div id = "header">GAME</div>
+
+    <hr>
+
+    <div class="centered">
+        <table id="board">
+            <tr>
+                <td id="00" onmousedown="select(this);"></td>
+                <td id="01" onmousedown="select(this);"></td>
+                <td id="02" onmousedown="select(this);"></td>
+                <td id="03" onmousedown="select(this);"></td>
+                <td id="04" onmousedown="select(this);"></td>
+            </tr>
+            <tr>
+                <td id="10" onmousedown="select(this);"></td>
+                <td id="11" onmousedown="select(this);"></td>
+                <td id="12" onmousedown="select(this);"></td>
+                <td id="13" onmousedown="select(this);"></td>
+                <td id="14" onmousedown="select(this);"></td>
+            </tr>
+            <tr>
+                <td id="20" onmousedown="select(this);"></td>
+                <td id="21" onmousedown="select(this);"></td>
+                <td id="22" onmousedown="select(this);"></td>
+                <td id="23" onmousedown="select(this);"></td>
+                <td id="24" onmousedown="select(this);"></td>
+            </tr>
+            <tr>
+                <td id="30" onmousedown="select(this);"></td>
+                <td id="31" onmousedown="select(this);"></td>
+                <td id="32" onmousedown="select(this);"></td>
+                <td id="33" onmousedown="select(this);"></td>
+                <td id="34" onmousedown="select(this);"></td>
+            </tr>
+            <tr>
+                <td id="40" onmousedown="select(this);"></td>
+                <td id="41" onmousedown="select(this);"></td>
+                <td id="42" onmousedown="select(this);"></td>
+                <td id="43" onmousedown="select(this);"></td>
+                <td id="44" onmousedown="select(this);"></td>
+            </tr>
+        </table>
+
+        <table id="guessbox">
+            <tr>
+                <td id="g0"></td>
+                <td id="g1"></td>
+                <td id="g2"></td>
+                <td id="g3"></td>
+                <td id="g4"></td>
+            </tr>
+        </table>
+
+
+        
+    </div>
+
+    <hr>
+
+
+    <button id="confirm" onclick="lettercheck(cellnum.join(''),word,gridcheck(cellnum.join('')))">CONFIRM</button>
+
+
+</body>
+</html>
