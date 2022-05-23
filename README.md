@@ -2,7 +2,6 @@ Flask Sea Battle
 ====
 Student Project<br>
 UWA 2022 Sem-1 CTIS3403 Agile Web Development<br>
-Group 75<br>
 ----
 <br>
 Setup guide<br>
