@@ -53,9 +53,21 @@
     <!--
     <input type="button" class="MyButton" value="Check if hit or miss" onclick="markCrimson()">
     -->
+    
+
+    <br>
+    <div>debug map below</div>
+    <div id="ajax_send_back">.....</div>
+    <button onclick="GetAjax_best5()">History top 5</button>
+    <button onclick="window.location.reload()">Restart</button>     <!-- which is actually refresh page -->
+    <div id="Highest_and_current_user"></div>
+
+
+
+
     <script>
 
-        let click_count = 0;
+let click_count = 0;
         let slot_clicked = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         let ship = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         let clicked = 0;
@@ -219,13 +231,4 @@
         }
 
     </script>
-
-    <br>
-    <div>debug map below</div>
-    <div id="ajax_send_back">.....</div>
-    <button onclick="GetAjax_best5()">History top 5</button>
-    <button onclick="window.location.reload()">Restart</button>     <!-- which is actually refresh page -->
-    <div id="Highest_and_current_user"></div>
-
-
     {% endblock %}
