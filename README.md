@@ -83,3 +83,35 @@ manipulate database manually in CLI<br>
 unit test<br>
 
 >test.py
+
+<br>
+<br>
+<br>
+<br>
+<br>
+currently, in "app.db"<br>
+<br>
+there are 2 test users<br>
+<br>
+　　　　password<br>
+john　　ura!<br>
+node　　wtf<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+each file do what<br>
+in ./<br>
+game.py　　the main .py<br>
+config.py　　configurations for Flask, db etc.<br>
+<br>
+in ./app<br>
+__init__.py　　basic config to run Flask<br>
+errors.py　　handling 404 and 500<br>
+forms.py　　filling the Jinja2 tags in "login.html" and "register.html"<br>
+models.py　　database table<br>
+routes.py　　redirecting, game logic<br>
+<br>
+in ./app/templates<br>
+　　.html files with Flask Jinja2 tags<br>
