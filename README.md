@@ -94,8 +94,8 @@ currently, in "app.db"<br>
 there are 2 test users<br>
 <br>
 　　　　password<br>
-john　　ura!<br>
-node　　wtf<br>
+john　　123<br>
+node　　1234<br>
 <br>
 <br>
 <br>
