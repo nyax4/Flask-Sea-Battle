@@ -175,10 +175,12 @@ def dataFromAjax_top5():
 
     for v in all_user:
         #print(v.id, v.username, v.wins_count, v.lost_count)
-        if v.wins_count == None or v.lost_count == None:
+        if v.wins_count == None or v.wins_count == 0 or v.lost_count == None or v.lost_count == 0:
             win_percentage = 0
-        else:
+        elif (v.wins_count+v.lost_count) != 0:
             win_percentage = v.wins_count/(v.wins_count+v.lost_count)
+        else:
+            win_percentage = 0
         
         if win_percentage>all_time_high:
             all_time_high = win_percentage
@@ -192,8 +194,10 @@ def dataFromAjax_top5():
 
     info['name_0'] = all_time_high_name
     info['percentage_0'] = all_time_high
-    info['percentage_1'] = current_user.wins_count/(current_user.wins_count+current_user.lost_count)
-
+    if (current_user.wins_count+current_user.lost_count) !=0:
+        info['percentage_1'] = current_user.wins_count/(current_user.wins_count+current_user.lost_count)
+    else:
+        info['percentage_1'] = 0
     #print(info)
     return jsonify(info)
 

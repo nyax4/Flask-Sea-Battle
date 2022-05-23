@@ -11,6 +11,10 @@
         if you can hit all 5 ships in 10 clicks, you win!<br>
         <br>
         have fun!<br>
+        <br>
+        <br>
+        <br>
+        Known issue: if hit, it will only turn red, after next "Check if hit or miss"<br>
     </p>
     <h1 class="text-white" id="game_result"></h1>
 
@@ -204,8 +208,8 @@
                     //alert("NAME: " + data.name_0 + "WIN %: " + data.percentage_0);
 
                     document.getElementById("Highest_and_current_user").innerHTML =
-                        "all time highest (win%):&nbsp;&nbsp;&nbsp;"+data.name_0+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+data.percentage_0+"<br>"+
-                        "your win%:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+Math.floor(data.percentage_1 * 100)/100+"<br>"
+                        "all time highest (win%):&nbsp;&nbsp;&nbsp;"+data.name_0+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+Math.floor(data.percentage_0*100)+" %<br>"+
+                        "your win%:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+Math.floor(data.percentage_1 * 100)+" %<br>"
                         ;
                 },
                 error: function () {
